@@ -3,10 +3,12 @@ set -euo pipefail
 repo_root="$(cd "$(dirname "$0")/.." && pwd)"
 cd "$repo_root"
 export APP_VARIANT=karma CI=1
+export PASEO_HERMES_LOW_MEMORY="${PASEO_HERMES_LOW_MEMORY:-1}"
 npm run build:app-deps
 cd packages/app
 case "${1:-}" in
   ios)
+    export HERMES_CLI_PATH="$repo_root/scripts/karma-hermesc.sh"
     npx expo prebuild --platform ios
     output="$repo_root/.dev/mobile/ios"
     mkdir -p "$output"

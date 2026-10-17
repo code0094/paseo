@@ -184,6 +184,7 @@ export default {
         },
       ],
       ...buildProfile.fdroidPlugins,
+      ...(appVariant === "karma" ? [require("./plugins/with-karma-hermes")] : []),
       ...(isProfileBuild ? [withAndroidProfileable] : []),
     ],
     experiments: {

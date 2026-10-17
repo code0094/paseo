@@ -653,6 +653,11 @@ Run `npm ci`, then `scripts/build-karma-mobile.sh ios` on macOS with Xcode and C
 The script builds a device Release app, packages an **unsigned** IPA for external signing, and
 writes it under `.dev/mobile/ios`. It does not contact App Store Connect or EAS.
 
+The local script limits Metro to two workers and defaults to Hermes `-Og` bytecode
+optimization to fit a shared builder. This is still a Release app, but runtime
+performance may differ from upstream's expensive `-O` optimization. Set
+`PASEO_HERMES_LOW_MEMORY=0` to retain `-O` on a sufficiently large builder.
+
 For Android, use `scripts/build-karma-mobile.sh android` with `ANDROID_HOME`,
 `KARMA_KEYSTORE`, `KARMA_KEYSTORE_PASSWORD_FILE`, and `KARMA_APKSIGNER` pointing to your
 local SDK and persistent signing credentials. The keystore alias is `paseo-karma`.
