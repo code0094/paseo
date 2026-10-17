@@ -66,6 +66,12 @@ function resolveSecretFile(params) {
 }
 
 const variants = {
+  karma: {
+    name: "Paseo Karma",
+    packageId: "ru.volgadigital.paseo",
+    googleServicesFile: undefined,
+    googleServiceInfoPlist: undefined,
+  },
   production: {
     name: "Paseo",
     packageId: "sh.paseo",
@@ -178,6 +184,7 @@ export default {
         },
       ],
       ...buildProfile.fdroidPlugins,
+      ...(appVariant === "karma" ? [require("./plugins/with-karma-hermes")] : []),
       ...(isProfileBuild ? [withAndroidProfileable] : []),
     ],
     experiments: {

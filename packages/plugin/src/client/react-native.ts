@@ -74,3 +74,12 @@ export declare function copyText(text: string): Promise<void>;
 export declare const TextInput: ForwardRefExoticComponent<
   TextInputProps & RefAttributes<NativeTextInput>
 >;
+
+/** Encoded local video. Available in builds with the inline-video extension. */
+export interface VideoProps {
+  base64: string;
+  mimeType: "video/mp4" | "video/quicktime" | "video/webm";
+  label?: string;
+  style?: StyleProp<ViewStyle>;
+}
+export declare const Video: ComponentType<VideoProps>;

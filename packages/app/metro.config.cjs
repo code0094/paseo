@@ -16,6 +16,10 @@ const customWebPlatform = (process.env.PASEO_WEB_PLATFORM ?? "")
   .toLowerCase();
 
 const config = getDefaultConfig(projectRoot);
+// Keep local custom builds within the shared builder's memory budget.
+if (process.env.APP_VARIANT === "karma") {
+  config.maxWorkers = 2;
+}
 const defaultResolveRequest = config.resolver.resolveRequest ?? resolve;
 
 // Keep app exports deterministic across dev machines and CI. Metro's Watchman
