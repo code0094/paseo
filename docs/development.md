@@ -645,3 +645,28 @@ Always run typecheck after changes:
 ```bash
 npm run typecheck
 ```
+
+## Karma mobile build
+
+This fork adds the host `Video` component and the companion `plugin-examples/video-embeds`.
+Run `npm ci`, then `scripts/build-karma-mobile.sh ios` on macOS with Xcode and CocoaPods.
+The script builds a device Release app, packages an **unsigned** IPA for external signing, and
+writes it under `.dev/mobile/ios`. It does not contact App Store Connect or EAS.
+
+For Android, use `scripts/build-karma-mobile.sh android` with `ANDROID_HOME`,
+`KARMA_KEYSTORE`, `KARMA_KEYSTORE_PASSWORD_FILE`, and `KARMA_APKSIGNER` pointing to your
+local SDK and persistent signing credentials. The keystore alias is `paseo-karma`.
+Output is an ARM64 APK under `.dev/mobile/android`. Keep signing credentials outside Git.
+
+The `karma` variant uses `ru.volgadigital.paseo` and appears as Paseo Karma alongside the
+official app. Pair it with your daemon separately. Push credentials for the official app do not
+establish push delivery for this bundle ID; custom-build notifications require separate validation.
+
+After installation, verify H.264/AAC playback, pause/seek/fullscreen, hidden-chat and background
+pause, unsupported-codec errors, microphone coexistence, and both LAN and relay transport on a
+physical phone. Browser tests do not prove native device playback. The test-pattern MP4 is a
+synthetic clip without personal content.
+
+Keep client and plugin changes separate from upstream release integration. The branch is based
+on v0.11.4; rebase these commits onto each selected stable tag, rebuild both binaries, and repeat
+physical-device checks before replacing an installed working build.

@@ -178,6 +178,18 @@ The scaffold's `tsconfig.json` omits the DOM library. Keep DOM globals out of cr
 components; do not add `/// <reference lib="dom" />` or `"DOM"` to `lib`.
 `layout.platform` carries the same value as React Native's `Platform.OS` for rendering decisions.
 
+### Inline video (Karma build)
+
+The Karma mobile build exposes `Video` from `@getpaseo/plugin/client/react-native`.
+It accepts `{ base64, mimeType, label?, style? }` and owns native playback and temporary-file
+cleanup. Supported MIME types are `video/mp4`, `video/quicktime`, and `video/webm`; the device
+must support the codec. Playback does not start automatically. Pause, seek and fullscreen use
+native controls. Hidden retained panels and backgrounding pause playback.
+
+Load bytes on demand via plugin RPC. Each file is limited to 30 MiB. Official clients do not
+expose this extension: check `typeof Video === "function"` before rendering. The existing module path keeps daemon compilation compatible.
+See `plugin-examples/video-embeds` for the companion plugin and its retained MIT attribution.
+
 ### Play audio
 
 Call `client.playAudio({ base64, mimeType }): Promise<void>` to play an audio file on the

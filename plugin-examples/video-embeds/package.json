@@ -1,0 +1,11 @@
+{
+  "name": "@getpaseo/plugin-example-video-embeds",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Inline videos using the host mobile player or web video",
+  "license": "MIT",
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run"
+  }
+}
