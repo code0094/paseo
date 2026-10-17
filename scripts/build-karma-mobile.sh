@@ -32,7 +32,7 @@ case "${1:-}" in
     output="$repo_root/.dev/mobile/android"
     mkdir -p "$output"
     "$KARMA_APKSIGNER" sign --ks "$KARMA_KEYSTORE" --ks-key-alias paseo-karma \
-      --ks-pass "file:$KARMA_KEYSTORE_PASSWORD_FILE" --key-pass "file:$KARMA_KEYSTORE_PASSWORD_FILE" \
+      --ks-pass "file:$KARMA_KEYSTORE_PASSWORD_FILE" \
       --out "$output/Paseo-Karma-arm64.apk" android/app/build/outputs/apk/release/app-release.apk
     "$KARMA_APKSIGNER" verify "$output/Paseo-Karma-arm64.apk"
     ;;
